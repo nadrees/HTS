@@ -15,9 +15,13 @@ namespace Prog_1
         {
             this.Word = word;
             charCounts = new Dictionary<char, int>();
+
+            var chars = word.ToCharArray();
+            foreach (var currentChar in chars)
+                IncrementCount(currentChar);
         }
 
-        public void IncrementCount(char c)
+        private void IncrementCount(char c)
         {
             if (!charCounts.ContainsKey(c))
                 charCounts.Add(c, 0);

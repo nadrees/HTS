@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HTSUtils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,10 +15,18 @@ namespace Prog_1
         static void Main(string[] args)
         {
             IEnumerable<WordDetails> words = BuildWords("wordlist.txt");
-            IEnumerable<WordDetails> scrambledWords = BuildWords("scrambledWords.txt");
+
+            var username = args[0];
+            var password = args[1];
+
+            var page = new ChallengePage("https://www.hackthissite.org/missions/prog/1/", username, password);
+            IEnumerable<WordDetails> scrambledWords = GetScrambledWords(page.GetChallengePage());
 
             var unscrambledWords = UnscrambleWords(scrambledWords, words);
-            File.WriteAllLines("result.txt", new[] { String.Join(",", unscrambledWords.ToArray()) });
+            page.SubmitAnswer(String.Join(",", unscrambledWords.ToArray()));
+
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
         }
 
         private static IEnumerable<String> UnscrambleWords(IEnumerable<WordDetails> scrambledWords, IEnumerable<WordDetails> words)
@@ -30,7 +39,27 @@ namespace Prog_1
                 unscrambledWords.Add(word);
             }
 
+            Console.WriteLine("Unscrambled words: {0}", String.Join(",", unscrambledWords.ToArray()));
+
             return unscrambledWords;
+        }
+
+        private static readonly Regex scrambledWordRegex = new Regex(@"<td><li>((:?[a-z]|[0-9]|:|\()+?)</li></td>", RegexOptions.Compiled);
+        private static IEnumerable<WordDetails> GetScrambledWords(String html)
+        {
+            List<WordDetails> words = new List<WordDetails>();
+
+            var matches = scrambledWordRegex.Matches(html);
+            for (int i = 0; i < matches.Count; i++)
+            {
+                var match = matches[i];
+                var word = new WordDetails(match.Groups[1].Value);
+                words.Add(word);
+            }
+
+            Console.WriteLine("Scrambled words: {0}", String.Join(",", words.Select(w => w.Word).ToArray()));
+
+            return words;
         }
 
         private static IEnumerable<WordDetails> BuildWords(String fileName)
@@ -39,11 +68,7 @@ namespace Prog_1
 
             foreach (String line in File.ReadAllLines(fileName))
             {
-                var chars = line.ToCharArray();
                 WordDetails details = new WordDetails(line);
-                foreach (var currentChar in chars)
-                    details.IncrementCount(currentChar);
-
                 words.Add(details);
             }
 
