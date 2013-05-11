@@ -25,6 +25,14 @@ namespace HTSUtils
             this.url = url;
         }
 
+        public HttpWebRequest CreateAuthenticatedWebRequest(String url)
+        {
+            var request = WebRequestExtensions.CreateWebRequest(url);
+            request.CookieContainer.Add(phpSessId);
+
+            return request;
+        }
+
         private static readonly Regex submitActionRegex = new Regex("<form name=\"submitform\" action=\"(.+?)\".*?>", RegexOptions.Compiled);
         public String GetChallengePage()
         {

@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prog 1", "Prog 1\Prog 1.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTSUtils", "HTSUtils\HTSUtils.csproj", "{00F918D8-99D5-4CB5-9148-6D99DAC74928}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prog 2", "Prog 2\Prog 2.csproj", "{567ADFC3-B460-4D7B-8D79-C807432D6ACC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{00F918D8-99D5-4CB5-9148-6D99DAC74928}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00F918D8-99D5-4CB5-9148-6D99DAC74928}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00F918D8-99D5-4CB5-9148-6D99DAC74928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{567ADFC3-B460-4D7B-8D79-C807432D6ACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{567ADFC3-B460-4D7B-8D79-C807432D6ACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{567ADFC3-B460-4D7B-8D79-C807432D6ACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{567ADFC3-B460-4D7B-8D79-C807432D6ACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,5 +41,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{820D6D48-76FB-4E91-856A-4075813CA07F} = {82086A48-A535-4D92-8182-155DC025F466}
 		{00F918D8-99D5-4CB5-9148-6D99DAC74928} = {82086A48-A535-4D92-8182-155DC025F466}
+		{567ADFC3-B460-4D7B-8D79-C807432D6ACC} = {82086A48-A535-4D92-8182-155DC025F466}
 	EndGlobalSection
 EndGlobal
